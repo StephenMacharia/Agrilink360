@@ -45,7 +45,7 @@ const dummyProduce = [
       email: "peterochieng@gmail.com",
       whatsapp: "+2547580018440",
     },
-    name: "sweet corn",
+    name: "sweet corngit",
     pricePerUnit: 1.8,
     unit: "kg",
     quantity: 1000,

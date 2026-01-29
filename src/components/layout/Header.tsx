@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, Search, Menu } from 'lucide-react';
+import { Bell, Search, Menu,LogOut, } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/contexts/AuthContext';
@@ -19,7 +19,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-  const { user } = useAuth();
+  const { user,logout } = useAuth();
 
   return (
     <header className="bg-card border-b border-border px-6 py-4">
@@ -73,7 +73,14 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Help & Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">Log out</DropdownMenuItem>
+              <DropdownMenuItem className="text-destructive"><Button
+                        onClick={logout}
+                        variant="outline"
+                        className="w-full justify-start"
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Logout
+                      </Button></DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
