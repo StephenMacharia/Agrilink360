@@ -14,9 +14,9 @@ const dummyProduce: ProduceType[] = [
     farmerId: 'f1',
     farmerName: 'John Kamau',
     farmerContact: {
-      phone: '+254798112233',
+      phone: '+25476333992',
       email: 'marywanjiru@gmail.com',
-      whatsapp: '+254798112233',
+      whatsapp: '+25476333992',
     },
     name: 'Fresh Tomatoes',
     category: 'Vegetables',
@@ -34,9 +34,9 @@ const dummyProduce: ProduceType[] = [
     farmerId: 'f2',
     farmerName: 'Mary Wanjiru',
     farmerContact: {
-      phone: '+254798112233',
+      phone: '+254715730317',
       email: 'marywanjiru@gmail.com',
-      whatsapp: '+254798112233',
+      whatsapp: '+254715730317',
     },
     name: 'Organic Potatoes',
     category: 'Vegetables',
