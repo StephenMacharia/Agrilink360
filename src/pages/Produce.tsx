@@ -12,7 +12,8 @@ const dummyProduce: ProduceType[] = [
   {
     id: '1',
     farmerId: 'f1',
-    farmerName: 'John Kamau',
+    farmerName: 'John Kamau  4.5 ',
+    rating: 4.2,
     farmerContact: {
       phone: '+25476333992',
       email: 'marywanjiru@gmail.com',
@@ -32,7 +33,8 @@ const dummyProduce: ProduceType[] = [
   {
     id: '2',
     farmerId: 'f2',
-    farmerName: 'Mary Wanjiru',
+    farmerName: 'Mary Wanjiru 4.1 ',
+    rating: 4.7,
     farmerContact: {
       phone: '+254715730317',
       email: 'marywanjiru@gmail.com',
@@ -52,7 +54,8 @@ const dummyProduce: ProduceType[] = [
   {
     id: '3',
     farmerId: 'f3',
-    farmerName: 'Peter Ochieng',
+    farmerName: 'Peter Ochieng  3.5',
+    rating: 3.7,
     farmerContact: {
       phone: '+254798112233',
       email: 'marywanjiru@gmail.com',
@@ -72,7 +75,8 @@ const dummyProduce: ProduceType[] = [
   {
     id: '4',
     farmerId: 'f4',
-    farmerName: 'Grace Mutua',
+    farmerName: 'Grace Mutua  3.3',
+    rating: 3.3,
     farmerContact: {
       phone: '+254798112233',
       email: 'marywanjiru@gmail.com',
@@ -92,7 +96,8 @@ const dummyProduce: ProduceType[] = [
   {
     id: '5',
     farmerId: 'f5',
-    farmerName: 'David Kiprop',
+    farmerName: 'David Kiprop 3.9',
+    rating: 3.9,
     farmerContact: {
       phone: '+254798112233',
       email: 'marywanjiru@gmail.com',
@@ -112,7 +117,8 @@ const dummyProduce: ProduceType[] = [
   {
     id: '6',
     farmerId: 'f6',
-    farmerName: 'Sarah Njoki',
+    farmerName: 'Sarah Njoki  4.4',
+    rating: 4.4,
     farmerContact: {
       phone: '+254798112233',
       email: 'marywanjiru@gmail.com',
@@ -132,6 +138,19 @@ const dummyProduce: ProduceType[] = [
 ];
 
 const categories = ['All', 'Vegetables', 'Grains', 'Dairy', 'Poultry', 'Fruits'];
+const renderStars = (rating: number) => {
+  const fullStars = Math.floor(rating); // Number of full stars
+  const halfStar = rating - fullStars >= 0.5; // Optional half star logic
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  return (
+    <span className="text-yellow-500">
+      {'★'.repeat(fullStars)}
+      {halfStar && '☆'}
+      {'☆'.repeat(emptyStars)}
+    </span>
+  );
+};
 
 export const Produce: React.FC = () => {
   const navigate = useNavigate();
@@ -201,6 +220,7 @@ export const Produce: React.FC = () => {
                 <div className="flex items-center gap-1 mt-2">
                   <User className="h-3 w-3" />
                   <span className="text-sm">{produce.farmerName}</span>
+                  <span className="ml-1">{renderStars(produce.rating)}</span>
                 </div>
               </CardDescription>
             </CardHeader>

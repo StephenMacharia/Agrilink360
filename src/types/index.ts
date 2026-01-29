@@ -42,6 +42,7 @@ export interface Produce {
   id: string;
   farmerId: string;
   farmerName: string;
+  rating: number;
   farmerContact: FarmerContact;
   name: string;
   category: string;
