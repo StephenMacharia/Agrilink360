@@ -227,13 +227,13 @@ export const Produce: React.FC = () => {
               </div>
             </CardContent>
             <CardFooter className="flex gap-2">
-              <Button
+              {/* <Button
   onClick={() => navigate(`/productsdetail/${produce.id}`)}
   variant="outline"
   className="flex-1"
 >
   Contact Farmer
-</Button>
+</Button> */}
 
              <Button
   onClick={() => navigate(`/productsdetail/${produce.id}`)}
