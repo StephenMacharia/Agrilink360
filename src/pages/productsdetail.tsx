@@ -9,9 +9,9 @@ const dummyProduce = [
     id: "1",
     farmerName: "John Kamau",
     farmerContact: {
-      phone: "+254712345678",
+      phone: "+254726333992",
       email: "johnkamau@gmail.com",
-      whatsapp: "+254712345678",
+      whatsapp: "+254726333992",
     },
     name: "Fresh Tomatoes",
     pricePerUnit: 2.5,
