@@ -98,7 +98,7 @@ export default function ProductsDetail() {
             </div>
 
             <div className="flex gap-3 mt-4">
-              <Button className="flex-1">Add to Cart</Button>
+              {/*<Button className="flex-1">Add to Cart</Button>*/}
 
               {/* Call Farmer */}
               <a href={`tel:${product.farmerContact.phone}`} className="flex-1">
