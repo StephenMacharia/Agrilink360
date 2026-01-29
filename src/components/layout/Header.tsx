@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Navigate,useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -20,6 +21,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   const { user,logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="bg-card border-b border-border px-6 py-4">
@@ -69,9 +71,9 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Help & Support</DropdownMenuItem>
+              <DropdownMenuItem><Button onClick={() => navigate("/profile")} variant="outline" className="flex-1">Profile</Button></DropdownMenuItem>
+              <DropdownMenuItem><Button onClick={() => navigate("/settings")} variant="outline" className="flex-1">Settings</Button></DropdownMenuItem>
+              <DropdownMenuItem><Button onClick={() => navigate("/settings")} variant="outline" className="flex-1">Help&Support</Button></DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-destructive"><Button
                         onClick={logout}
