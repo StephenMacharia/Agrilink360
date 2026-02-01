@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState} from 'react';
 import { Bell, Search, Menu,LogOut, } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,16 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Navigate,useNavigate } from 'react-router-dom';
 
+
+
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+}
+
 interface HeaderProps {
   onMenuClick?: () => void;
 }
@@ -22,6 +32,25 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   const { user,logout } = useAuth();
   const navigate = useNavigate();
+  const [notifications, setNotifications] = useState<Notification[]>([
+  {
+    id: '1',
+    title: 'New Order',
+    message: 'A buyer placed an order for 50kg of maize.',
+    read: false,
+    createdAt: '2 mins ago',
+  },
+  {
+    id: '2',
+    title: 'Payment Received',
+    message: 'KES 12,000 has been credited to your wallet.',
+    read: false,
+    createdAt: '1 hour ago',
+  },
+]);
+const unreadCount = notifications.filter(n => !n.read).length;
+
+
 
   return (
     <header className="bg-card border-b border-border px-6 py-4">
@@ -47,10 +76,52 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
         <div className="flex items-center space-x-4">
           <CartButton />
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-accent rounded-full"></span>
-          </Button>
+          <DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="ghost" size="icon" className="relative">
+      <Bell className="h-5 w-5" />
+      {unreadCount > 0 && (
+        <span className="absolute top-1 right-1 h-2 w-2 bg-accent rounded-full" />
+      )}
+    </Button>
+  </DropdownMenuTrigger>
+
+  <DropdownMenuContent className="w-80" align="end">
+    <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+
+    {notifications.length === 0 && (
+      <div className="px-4 py-3 text-sm text-muted-foreground">
+        No notifications
+      </div>
+    )}
+
+    {notifications.map((notification) => (
+      <DropdownMenuItem
+        key={notification.id}
+        className={`flex flex-col items-start space-y-1 cursor-pointer ${
+          !notification.read ? 'bg-muted' : ''
+        }`}
+        onClick={() => {
+          setNotifications(prev =>
+            prev.map(n =>
+              n.id === notification.id ? { ...n, read: true } : n
+            )
+          );
+        }}
+      >
+        <p className="text-sm font-medium">{notification.title}</p>
+        <p className="text-xs text-muted-foreground">
+          {notification.message}
+        </p>
+        <span className="text-[10px] text-muted-foreground">
+          {notification.createdAt}
+        </span>
+      </DropdownMenuItem>
+    ))}
+  </DropdownMenuContent>
+</DropdownMenu>
+
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

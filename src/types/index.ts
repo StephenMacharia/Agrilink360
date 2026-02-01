@@ -103,3 +103,10 @@ export interface DashboardStats {
   revenueGrowth: number;
   transactionGrowth: number;
 }
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+}
