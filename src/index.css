@@ -11,60 +11,60 @@ All colors MUST be HSL.
     /* Core Colors - Agricultural Theme */
     --background: 0 0% 98%;
     --foreground: 206 14% 18%;
-    
+
     --card: 0 0% 100%;
     --card-foreground: 206 14% 18%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 206 14% 18%;
-    
+
     /* Forest Green Primary */
     --primary: 149 37% 25%;
     --primary-foreground: 0 0% 100%;
     --primary-hover: 149 37% 20%;
     --primary-light: 149 37% 35%;
-    
+
     /* Fresh Green Secondary */
     --secondary: 99 44% 36%;
     --secondary-foreground: 0 0% 100%;
     --secondary-hover: 99 44% 31%;
-    
+
     --muted: 210 20% 96%;
     --muted-foreground: 206 14% 45%;
-    
+
     /* Golden Yellow Accent */
     --accent: 45 100% 52%;
     --accent-foreground: 206 14% 18%;
     --accent-hover: 45 100% 47%;
-    
+
     /* Status Colors */
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
-    
+
     --warning: 43 74% 66%;
     --warning-foreground: 206 14% 18%;
-    
+
     --destructive: 0 72% 56%;
     --destructive-foreground: 0 0% 100%;
-    
+
     --border: 214 20% 91%;
     --input: 214 20% 91%;
     --ring: 149 37% 25%;
-    
+
     --radius: 0.625rem;
-    
+
     /* Custom Design Tokens */
     --gradient-primary: linear-gradient(135deg, hsl(149 37% 25%), hsl(99 44% 36%));
     --gradient-accent: linear-gradient(135deg, hsl(45 100% 52%), hsl(43 74% 66%));
     --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
     --gradient-hero: linear-gradient(135deg, hsl(149 37% 25% / 0.9), hsl(99 44% 36% / 0.8));
-    
+
     --shadow-sm: 0 1px 2px 0 hsl(206 14% 18% / 0.05);
     --shadow-md: 0 4px 6px -1px hsl(206 14% 18% / 0.1);
     --shadow-lg: 0 10px 15px -3px hsl(206 14% 18% / 0.1);
     --shadow-xl: 0 20px 25px -5px hsl(206 14% 18% / 0.1);
     --shadow-glow: 0 0 20px hsl(149 37% 25% / 0.2);
-    
+
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -143,6 +143,7 @@ All colors MUST be HSL.
       transform: translateY(20px);
       filter: blur(10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -150,6 +151,27 @@ All colors MUST be HSL.
     }
   }
 }
+
 .animate-fade-in {
-    animation: fade-in 0.8s ease-out both;
-  } 
+  animation: fade-in 0.8s ease-out both;
+}
+
+/* Smooth pulse animation */
+@keyframes pulseSlow {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.52);
+  }
+}
+
+/* Utility class */
+.pulse-slow {
+  animation: pulseSlow 5.0s ease-in-out infinite;
+}

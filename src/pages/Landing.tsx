@@ -99,8 +99,8 @@ export const Landing: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
         <div className="container mx-auto px-6 py-24 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Empowering <span className="bg-gradient-primary bg-clip-text text-transparent">Agricultural</span> Communities
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in ">
+              <span className="animate-pulse pulse-slow">Empowering <span className="bg-gradient-primary bg-clip-text text-transparent">Agricultural</span> Communities</span>
             </h1>
             <p className="text-xl text-white mb-8 animate-slide-up">
               Connect, trade, and grow with AgriLink360's comprehensive platform for farmers,
