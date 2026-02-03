@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeroBackgroundCarousel } from "@/components/layout/HeroBackgroundCarousel";
+
 import {
   Wheat,
   Users,
@@ -58,6 +60,12 @@ export const Landing: React.FC = () => {
     'Mobile-friendly interface',
     'Multi-language support',
   ];
+  const heroImages = [
+    "https://images.unsplash.com/photo-1500937386664-56d1dfef3854",
+    "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1527847263472-aa5338d178b8",
+  ];
+
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
@@ -86,31 +94,31 @@ export const Landing: React.FC = () => {
       </nav>
 
       {/* Hero Section */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage:
-            "url('https://plus.unsplash.com/premium_photo-1661907005604-cec7ffb6a042?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YWdyaUNCdWx0dXJlJTIwQWdyYWN1bHR1cmV8ZW58MHx8MHx8fDA%3D')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
-        <div className="container mx-auto px-6 py-24 relative">
+      <section className="relative overflow-hidden min-h-[70vh] flex items-center">
+        {/* Background carousel */}
+        <HeroBackgroundCarousel images={heroImages} />
+
+        {/* Hero content */}
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in ">
-              <span className="animate-pulse pulse-slow">Empowering <span className="bg-gradient-primary bg-clip-text text-transparent">Agricultural</span> Communities</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+              <span className='animate-pulse pulse-slow'> Empowering
+                <span className="bg-gradient-primary bg-clip-text text-transparent">
+                  Agricultural
+                </span>
+                Communities
+              </span>
             </h1>
+
             <p className="text-xl text-white mb-8 animate-slide-up">
-              Connect, trade, and grow with AgriLink360's comprehensive platform for farmers,
-              salespersons, and agricultural businesses.
+              Connect, trade, and grow with AgriLink360's comprehensive platform for
+              farmers and agribusinesses.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/register">
-                <Button size="lg" className="bg-gradient-primary hover:opacity-90">
+                <Button size="lg" className="bg-gradient-primary">
                   Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button size="lg" variant="outline">
@@ -120,6 +128,7 @@ export const Landing: React.FC = () => {
           </div>
         </div>
       </section>
+
 
       {/* Features Grid */}
       <section className="py-20 bg-card/50">
