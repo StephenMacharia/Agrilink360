@@ -44,7 +44,7 @@ export const Credits: React.FC = () => {
             <CreditCard className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${dummyCredit.creditLimit.toFixed(2)}</div>
+            <div className="text-2xl font-bold">ksh {dummyCredit.creditLimit.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">Total approved credit</p>
           </CardContent>
         </Card>
@@ -55,7 +55,7 @@ export const Credits: React.FC = () => {
             <TrendingUp className="h-4 w-4 text-destructive" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-destructive">${dummyCredit.usedCredit.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-destructive">ksh {dummyCredit.usedCredit.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">Current outstanding</p>
           </CardContent>
         </Card>
@@ -66,7 +66,7 @@ export const Credits: React.FC = () => {
             <TrendingDown className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary">${dummyCredit.availableCredit.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-primary">ksh {dummyCredit.availableCredit.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">Ready to use</p>
           </CardContent>
         </Card>
@@ -96,8 +96,8 @@ export const Credits: React.FC = () => {
         <CardContent>
           <div className="space-y-4">
             <div className="flex justify-between text-sm">
-              <span>Used: ${dummyCredit.usedCredit.toFixed(2)}</span>
-              <span>Limit: ${dummyCredit.creditLimit.toFixed(2)}</span>
+              <span>Used: ksh {dummyCredit.usedCredit.toFixed(2)}</span>
+              <span>Limit: ksh {dummyCredit.creditLimit.toFixed(2)}</span>
             </div>
             <Progress value={creditUsagePercentage} className="h-3" />
             <div className="flex items-center gap-2">
@@ -184,9 +184,9 @@ export const Credits: React.FC = () => {
                     </Badge>
                   </TableCell>
                   <TableCell className={transaction.type === 'credit' ? 'text-primary' : 'text-destructive'}>
-                    {transaction.type === 'credit' ? '+' : '-'}${transaction.amount.toFixed(2)}
+                    {transaction.type === 'credit' ? '+' : '-'}ksh {transaction.amount.toFixed(2)}
                   </TableCell>
-                  <TableCell className="font-medium">${transaction.balance.toFixed(2)}</TableCell>
+                  <TableCell className="font-medium">ksh {transaction.balance.toFixed(2)}</TableCell>
                   <TableCell>
                     <Badge variant="outline">
                       <Clock className="h-3 w-3 mr-1" />

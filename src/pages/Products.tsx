@@ -168,7 +168,7 @@ export const Products: React.FC = () => {
             <CardContent>
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <span className="text-2xl font-bold text-primary">${product.price}</span>
+                  <span className="text-2xl font-bold text-primary">ksh {product.price}</span>
                   <span className="text-muted-foreground text-sm ml-1">/{product.unit}</span>
                 </div>
                 <Badge variant="outline">{product.category}</Badge>

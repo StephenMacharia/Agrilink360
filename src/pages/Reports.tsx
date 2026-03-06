@@ -70,7 +70,7 @@ export const Reports: React.FC = () => {
             <TrendingUp className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$18,460</div>
+            <div className="text-2xl font-bold">ksh 18,460</div>
             <p className="text-xs text-primary">+20.1% from last month</p>
           </CardContent>
         </Card>

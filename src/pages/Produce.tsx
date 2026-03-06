@@ -229,12 +229,12 @@ export const Produce: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Price</span>
                   <span className="font-bold text-primary">
-                    ${produce.pricePerUnit}/{produce.unit}
+                    ksh {produce.pricePerUnit}/{produce.unit}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Quantity</span>
-                  <span>{produce.quantity} {produce.unit}</span>
+                  <span>ksh {produce.quantity} {produce.unit}</span>
                 </div>
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <MapPin className="h-3 w-3" />

@@ -112,7 +112,7 @@ export const Transactions: React.FC = () => {
             <TrendingUp className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary">${totalRevenue.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-primary">ksh {totalRevenue.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">From sales this month</p>
           </CardContent>
         </Card>
@@ -122,7 +122,7 @@ export const Transactions: React.FC = () => {
             <TrendingDown className="h-4 w-4 text-destructive" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-destructive">${totalExpenses.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-destructive">ksh {totalExpenses.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">From purchases this month</p>
           </CardContent>
         </Card>
@@ -133,7 +133,7 @@ export const Transactions: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-accent">
-              ${(totalRevenue - totalExpenses).toFixed(2)}
+              ksh {(totalRevenue - totalExpenses).toFixed(2)}
             </div>
             <p className="text-xs text-muted-foreground">This month's profit</p>
           </CardContent>
@@ -216,7 +216,7 @@ export const Transactions: React.FC = () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="font-bold">
-                    ${transaction.amount.toFixed(2)}
+                    ksh {transaction.amount.toFixed(2)}
                   </TableCell>
                   <TableCell>
                     <Badge 

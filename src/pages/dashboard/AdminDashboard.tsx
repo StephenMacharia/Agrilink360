@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,17 +10,122 @@ import {
   Activity,
   Download,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  X,
+  FileText,
+  FileJson,
+  Check,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
+/* ── Export helpers ─────────────────────────────────────────────── */
+function downloadFile(content: string, filename: string, mime: string): void {
+  const blob = new Blob([content], { type: mime });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), { href: url, download: filename });
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function exportCSV(
+  stats: { label: string; value: string; change: string }[],
+  activities: { user: string; action: string; time: string }[]
+): void {
+  let csv = `Admin Dashboard Report — ${new Date().toLocaleDateString()}\n\n`;
+  csv += 'SUMMARY STATS\nMetric,Value,Change vs Last Month\n';
+  stats.forEach(s => { csv += `"${s.label}","${s.value}","${s.change}"\n`; });
+  csv += '\nRECENT ACTIVITY\nUser,Action,Time\n';
+  activities.forEach(a => { csv += `"${a.user}","${a.action}","${a.time}"\n`; });
+  downloadFile(csv, `dashboard-report-${Date.now()}.csv`, 'text/csv');
+}
+
+function exportJSON(
+  stats: { label: string; value: string; change: string; trend: string }[],
+  activities: { user: string; action: string; time: string }[]
+): void {
+  const payload = { generatedAt: new Date().toISOString(), stats, recentActivities: activities };
+  downloadFile(JSON.stringify(payload, null, 2), `dashboard-report-${Date.now()}.json`, 'application/json');
+}
+
+/* ── Export Modal ───────────────────────────────────────────────── */
+interface ExportModalProps {
+  stats: { label: string; value: string; change: string; trend: string }[];
+  activities: { user: string; action: string; time: string }[];
+  onClose: () => void;
+}
+
+const ExportModal: React.FC<ExportModalProps> = ({ stats, activities, onClose }) => {
+  const [done, setDone] = useState<'csv' | 'json' | null>(null);
+
+  function handle(type: 'csv' | 'json'): void {
+    if (type === 'csv')  exportCSV(stats, activities);
+    if (type === 'json') exportJSON(stats, activities);
+    setDone(type);
+    setTimeout(onClose, 900);
+  }
+
+  const options = [
+    { type: 'csv'  as const, icon: <FileText className="h-5 w-5" />,  label: 'CSV Spreadsheet', desc: 'Stats + activity log as comma-separated values', accent: '#4ade80' },
+    { type: 'json' as const, icon: <FileJson className="h-5 w-5" />, label: 'JSON Data',         desc: 'Structured machine-readable format',            accent: '#60a5fa' },
+  ];
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)' }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="bg-background border rounded-2xl w-[420px] shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+        {/* Header */}
+        <div className="flex justify-between items-center p-6 pb-0">
+          <div>
+            <p className="font-bold text-lg">Export Report</p>
+            <p className="text-sm text-muted-foreground mt-1">Choose a format to download</p>
+          </div>
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Options */}
+        <div className="p-6 flex flex-col gap-3">
+          {options.map(({ type, icon, label, desc, accent }) => (
+            <button
+              key={type}
+              onClick={() => handle(type)}
+              className="flex items-center gap-4 p-4 rounded-xl border text-left transition-all hover:border-primary"
+              style={{ borderColor: done === type ? accent : undefined, background: done === type ? `${accent}18` : undefined }}
+            >
+              <span style={{ color: accent }}>{done === type ? <Check className="h-5 w-5" /> : icon}</span>
+              <div className="flex-1">
+                <p className="font-semibold text-sm">{label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+              </div>
+              {!done && <span className="text-xs font-bold" style={{ color: accent }}>↓</span>}
+            </button>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="border-t px-6 py-3 flex justify-end">
+          <Button variant="outline" size="sm" onClick={onClose}>Cancel</Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── AdminDashboard ─────────────────────────────────────────────── */
 export const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
+  const [showExport, setShowExport] = useState(false);
 
   const stats = [
     {
       label: 'Total Revenue',
-      value: '$125,430',
+      value: 'ksh 125,430',
       change: '+12.5%',
       trend: 'up',
       icon: DollarSign,
@@ -58,12 +163,20 @@ export const AdminDashboard: React.FC = () => {
 
   return (
     <div className="p-6 space-y-6">
+      {showExport && (
+        <ExportModal
+          stats={stats}
+          activities={recentActivities}
+          onClose={() => setShowExport(false)}
+        />
+      )}
+
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
           <p className="text-muted-foreground">Welcome back, {user?.firstName}!</p>
         </div>
-        <Button className="bg-gradient-primary hover:opacity-90">
+        <Button className="bg-gradient-primary hover:opacity-90" onClick={() => setShowExport(true)}>
           <Download className="h-4 w-4 mr-2" />
           Export Report
         </Button>
