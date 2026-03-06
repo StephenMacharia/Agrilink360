@@ -121,9 +121,11 @@ export const Landing: React.FC = () => {
                   Start Free Trial
                 </Button>
               </Link>
-              <Button size="lg" variant="outline">
-                Watch Demo
-              </Button>
+              <Link to="/login">
+                <Button size="lg" variant="outline">
+                  Start Demo
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

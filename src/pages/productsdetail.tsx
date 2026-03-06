@@ -119,7 +119,7 @@ export default function ProductsDetail() {
               {/* Call Farmer */}
               <a href={`tel:${product.farmerContact.phone}`} className="flex-1">
                 <Button variant="outline" className="w-full">
-                  Call Farmer
+                  Call Farmer's Agent
                 </Button>
               </a>
 
@@ -135,7 +135,7 @@ export default function ProductsDetail() {
                   className="flex-1"
                 >
                   <Button variant="outline" className="w-full">
-                    WhatsApp
+                    WhatsApp Agent
                   </Button>
                 </a>
               )}
