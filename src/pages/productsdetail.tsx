@@ -91,7 +91,7 @@ export default function ProductsDetail() {
             />
 
             <p className="text-green-600 text-3xl font-bold">
-              ${product.pricePerUnit}/{product.unit}
+              ksh {product.pricePerUnit}/{product.unit}
             </p>
 
             <p className="text-gray-700">{product.description}</p>
